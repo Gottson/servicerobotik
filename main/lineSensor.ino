@@ -14,9 +14,6 @@
 // poor readings.
 
 
-//Config methods for line sensor
-
-
 void sensorSetup(){
     // configure the sensors
   //Serial.println();
@@ -90,7 +87,7 @@ void sensorCheck(){
 }
 
 //Get the linecommanders calculated position and sets direction + prints recommendation
-void turnCommander() {
+void lineReader() {
     posValue = qtr.readLineBlack(sensorValues);
      if(posValue == 0){
       Serial.println("Outside right");
