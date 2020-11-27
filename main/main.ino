@@ -3,12 +3,12 @@
 
 
 // Gripper Initialization
-  // Servo_lyft
-  Servo lyft_servo; 
-  int lyftPin = 3;
-  // Servo_knip
-  Servo knip_servo; 
-  int knipPin = 2; 
+  // Servo_lift
+  Servo lift_servo; 
+  int liftPin = 3;
+  // Servo_grip
+  Servo grip_servo; 
+  int gripPin = 2; 
   // För avståndssensorn (IR-PIN) 
   uint8_t distance_limit = 100;
   #define IRPin A0; 
