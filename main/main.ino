@@ -3,7 +3,7 @@
 
 
 // Gripper Initialization
-  // Servo_luft
+  // Servo_lyft
   Servo lyft_servo; 
   int lyftPin = 3;
   // Servo_knip
@@ -33,7 +33,6 @@ sensorSetup();
 servoSetup();
 gripSetup();
 }
-
 
 void loop()
 {
