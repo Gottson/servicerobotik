@@ -5,17 +5,17 @@
 
 // Gripper Initialization
   // Servo_lift
-  Servo grip_serv o;
-  Servo lift_serv o;
+  Servo grip_servo;
+  Servo lift_servo;
   #define liftPin 5
   #define gripPin 6
   #define gripAngle 170
   #define liftAngle 170
   
   //IR sensor Initialization
-  #define sensorBuff 
+  #define sensorBuff 3
   #define IRPin A1
-  #define breakSwitch 
+  #define breakSwitch A0
   int avgDist[sensorBuff];
   uint8_t distance_limit = 100;
   uint8_t front_dist;
@@ -44,19 +44,20 @@ HCSR04 hc(2,new int[6]{5,6,7,8,9,10},6);
 
 void setup()
 {
-//sensorSetup();
-//servoSetup();
+sensorSetup();
+servoSetup();
 //gripSetup();
-distanceSetup();
+//distanceSetup();
 }
 
 void loop()
 {
+  //forward();
 //sensorCheck();
-//lineReader();
+lineReader();
 //gripLoop();
 //if(frontCheck()){
 //  gripLoop();
 //}
-frontCheck();
+//frontCheck();
 }
