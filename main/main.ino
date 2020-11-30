@@ -5,17 +5,17 @@
 
 // Gripper Initialization
   // Servo_lift
-  Servo grip_servo; 
-  Servo lift_servo; 
-  #define liftPin 3
-  #define gripPin 2
+  Servo grip_serv o;
+  Servo lift_serv o;
+  #define liftPin 5
+  #define gripPin 6
   #define gripAngle 170
   #define liftAngle 170
   
   //IR sensor Initialization
-  #define sensorBuff 3
+  #define sensorBuff 
   #define IRPin A1
-  #define breakSwitch 3
+  #define breakSwitch 
   int avgDist[sensorBuff];
   uint8_t distance_limit = 100;
   uint8_t front_dist;
