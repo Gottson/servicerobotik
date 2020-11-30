@@ -1,5 +1,6 @@
 #include <QTRSensors.h>
 #include <Servo.h>
+#include <HCSR04.h>
 
 
 // Gripper Initialization
@@ -20,10 +21,9 @@
   uint8_t front_dist;
 
   // För avståndssensorn (IR-PIN) 
- 
-
   uint8_t value_0;
   uint8_t i;
+  
   // PINS FÖR SWITCH 
   int inSwitch = 5; 
 
@@ -36,6 +36,11 @@ QTRSensors qtr;
 const uint8_t SensorCount = 8;
 uint16_t sensorValues[SensorCount];
 uint16_t posValue;
+
+//Side sensors init
+HCSR04 hc(2,new int[6]{5,6,7,8,9,10},6);
+//initialisation of class HCSR04 (trig pin , echo pin, number of sensor)
+
 
 void setup()
 {
