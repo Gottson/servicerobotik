@@ -4,14 +4,24 @@
 
 // Gripper Initialization
   // Servo_lift
-  Servo lift_servo; 
-  int liftPin = 3;
-  // Servo_grip
   Servo grip_servo; 
-  int gripPin = 2; 
-  // För avståndssensorn (IR-PIN) 
+  Servo lift_servo; 
+  #define liftPin 3
+  #define gripPin 2
+  #define gripAngle 170
+  #define liftAngle 170
+  
+  //IR sensor Initialization
+  #define sensorBuff 3
+  #define IRPin A1
+  #define breakSwitch 3
+  int avgDist[sensorBuff];
   uint8_t distance_limit = 100;
-  #define IRPin A0; 
+  uint8_t front_dist;
+
+  // För avståndssensorn (IR-PIN) 
+ 
+
   uint8_t value_0;
   uint8_t i;
   // PINS FÖR SWITCH 
@@ -29,14 +39,18 @@ uint16_t posValue;
 
 void setup()
 {
-sensorSetup();
-servoSetup();
-gripSetup();
+//sensorSetup();
+//servoSetup();
+//gripSetup();
+distanceSetup();
 }
 
 void loop()
 {
 //sensorCheck();
-lineReader();
-gripLoop();
+//lineReader();
+//gripLoop();
+if(frontCheck()){
+  gripLoop();
+}
 }
