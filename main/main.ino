@@ -50,7 +50,8 @@ void loop()
 //sensorCheck();
 //lineReader();
 //gripLoop();
-if(frontCheck()){
-  gripLoop();
-}
+//if(frontCheck()){
+//  gripLoop();
+//}
+frontCheck();
 }

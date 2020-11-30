@@ -10,31 +10,13 @@ void gripSetup() {
 }
 
 void gripLoop() {
+  // Drive slow
  delay(500);
   if(!digitalRead(breakSwitch))
   {
-    //Do something
+    _grip(true);
   }
-//  lift_servo.write(40);
-//  delay(100); 
-//  lift_servo.write(90);
-//  }
-//  delay(250);
-//  int val1 = digitalRead(5);
-//  int val2 = digitalRead(6);
-//  Serial.println("start");
-//  Serial.println(val1);
-//  Serial.println(val2);
-//  if(!val1){
-//    curr_angle += 2;
-//    Serial.println(curr_angle);
-//    lift_servo.write(curr_angle);
-//    delay(100);
-//  }else if(!val2){
-//    curr_angle -= 2;
-//    Serial.println(curr_angle);
-//    lift_servo.write(curr_angle);
-//    delay(100);
+
   }
 
 void _grip(boolean grip){
@@ -43,17 +25,26 @@ void _grip(boolean grip){
     grip_servo.write(i);
     delay(10);
   }
-  lift();
+  _lift(true);
   }else{
    for(int i = gripAngle; i >= 90; i--){
     grip_servo.write(i);
     delay(10);
-  } 
+  }
+  _lift(false); 
   }
 }
-void _lift(void){
+void _lift(boolean lift){
+  if(lift){
     for(int i = 90; i <= liftAngle; i++){
-    lift_servo.write(i);
-    delay(10);
+      lift_servo.write(i);
+      delay(10);
+    }
+    _grip(false);
+  }else{
+    for(int i = liftAngle; i >= 90; i--){
+      lift_servo.write(i);
+      delay(10);
+    }
   }
 }

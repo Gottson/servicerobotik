@@ -9,20 +9,21 @@ void distanceSetup(){
 }
 
 
-boolean frontCheck(){
+void frontCheck(){
   front_dist = analogRead(IRPin);
   avgDist[last] = front_dist;
   last += 1;
-  if(last==sensorBuff){
+  if(last==sensorBuff ){
     last = 0;
   }
   int avg = _avgDist(avgDist);
   Serial.println(_avgDist(avgDist));
-  if(avg < distance_limit){
-    return true;
-  }else{
-    return false;
-  }
+  delay(250);
+//  if(avg < distance_limit){
+//    return true;
+//  }else{
+//    return false;
+//  }
   // 85 volt isch 14 cm
   
 }
