@@ -14,7 +14,7 @@
 // poor readings.
 
 
-void sensorSetup(){
+void lineSensorSetup(){
     // configure the sensors
   //Serial.println();
   //Serial.print("Calibration started");

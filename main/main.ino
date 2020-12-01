@@ -38,16 +38,16 @@ uint16_t sensorValues[SensorCount];
 uint16_t posValue;
 
 //Side sensors init
-HCSR04 hc(2,new int[6]{5,6,7,8,9,10},6);
+HCSR04 hc(16,new int[2]{17,18},2);
 //initialisation of class HCSR04 (trig pin , echo pin, number of sensor)
 
 
 void setup()
 {
-sensorSetup();
-servoSetup();
-//gripSetup();
-//distanceSetup();
+lineSensorSetup();
+wheelServoSetup();
+gripServoSetup();
+frontSensorSetup();
 }
 
 void loop()

@@ -1,17 +1,17 @@
 int curr_angle;
-void gripSetup() {
+
+void gripServoSetup() {
   Serial.begin(9600);
   lift_servo.attach(liftPin);
   curr_angle = 90;
   lift_servo.write(curr_angle);
-
   grip_servo.attach(gripPin);   
   pinMode(INPUT, breakSwitch);
 }
 
 void gripLoop() {
-  // Drive slow
- delay(500);
+  slowForward();
+  delay(500);
   if(!digitalRead(breakSwitch))
   {
     _grip(true);

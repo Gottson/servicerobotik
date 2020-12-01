@@ -1,5 +1,6 @@
 int last;
-void distanceSetup(){
+
+void frontSensorSetup(){
   Serial.begin(9600);
   int val = analogRead(IRPin);
   for(int i = 0; i<sensorBuff; i++){

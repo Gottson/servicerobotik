@@ -5,8 +5,9 @@ void sideSensorSetup() {
 
 //return curent distance in serial for sensor 1 to 6
 void sideSensorLoop() {
-  for (int i = 0; i < 6; i++ ) {
-    Serial.println( hc.dist(i) );
-    } 
+  
+    Serial.println(hc.dist(0));
+    Serial.println(hc.dist(1));
+    
   }
   

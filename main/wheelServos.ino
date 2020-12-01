@@ -1,4 +1,4 @@
-void servoSetup(){
+void wheelServoSetup(){
   leftServo.attach(11);  // attaches the servos on pins
   rightServo.attach(10);
 }
@@ -7,6 +7,11 @@ void forward(){
   leftServo.write(73);
   rightServo.write(110);
   delay(15);  
+}
+
+void slowForward(){
+  leftServo.write(85);
+  rightServo.write(95);
 }
 
 void slightRight(){
