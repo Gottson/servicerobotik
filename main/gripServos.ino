@@ -8,43 +8,64 @@ void gripServoSetup() {
   grip_servo.attach(gripPin);   
   pinMode(INPUT, breakSwitch);
 }
+//Upp i gradantal kniper åt. Stänger på 98 atm
+//Upp i gradantal sänker klon.
 
-void gripLoop() {
+
+void gripTop() {
+  Serial.println("GRIP TOP"); 
   slowForward();
   delay(500);
   if(!digitalRead(breakSwitch))
   {
-    _grip(true);
+    stop();
+    _grip();
+    _lift();
+    _unGrip(); 
+    _unLift(); 
   }
+}
 
+ void gripHold() {
+  Serial.println("GRIP HOLD"); 
+  slowForward();
+  delay(500);
+  if(!digitalRead(breakSwitch))
+  {
+    stop();
+    _grip();
+    lift_servo.write(gripAngle+15);
   }
+}
 
-void _grip(boolean grip){
-  if(grip){
+void _grip(){
   for(int i = 90; i <= gripAngle; i++){
     grip_servo.write(i);
     delay(10);
   }
-  _lift(true);
-  }else{
+}
+
+void _unGrip(){
    for(int i = gripAngle; i >= 90; i--){
     grip_servo.write(i);
     delay(10);
   }
-  _lift(false); 
-  }
 }
-void _lift(boolean lift){
-  if(lift){
+  
+void _lift(){
     for(int i = 90; i <= liftAngle; i++){
       lift_servo.write(i);
       delay(10);
     }
-    _grip(false);
-  }else{
+}
+
+void _unLift(){
     for(int i = liftAngle; i >= 90; i--){
       lift_servo.write(i);
       delay(10);
     }
   }
+
+void liftTest(){
+  lift_servo.write(90);
 }
