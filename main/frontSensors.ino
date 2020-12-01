@@ -1,7 +1,11 @@
 int last;
 
 void frontSensorSetup(){
-  Serial.begin(9600);
+
+  //Switch
+  pinMode(INPUT, breakSwitch);
+
+  //Distance sensor
   int val = analogRead(IRPin);
   for(int i = 0; i<sensorBuff; i++){
     avgDist[i] = val;
@@ -21,11 +25,15 @@ boolean frontDistanceCheck(){
   //Serial.println("Avg. Dist:" + _avgDist(avgDist));
   delay(250);
   if(avg < distance_limit){
+    Serial.println("LOW"); 
+    Serial.println(avg); 
     return true;
-    Serial.println("Front distance short"); 
+
   }else{
+    Serial.println("HIGH"); 
+    Serial.println(avg); 
     return false;
-    Serial.println("Front distance long"); 
+  
   }
   // 85 volt isch 14 cm
   
@@ -39,3 +47,13 @@ int _avgDist(int dist[]){
   return avg/sensorBuff; 
   
 }
+
+boolean frontSwitch(){
+  if (digitalRead(breakSwitch)){
+    return false;
+  }
+  else{
+    return true;
+  }
+  
+ }

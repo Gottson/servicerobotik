@@ -9,8 +9,11 @@
   Servo lift_servo;
   #define liftPin 6
   #define gripPin 5
-  #define gripAngle 170
-  #define liftAngle 170
+  #define restAngle 135
+  #define liftAngle 25
+  #define gripAngle 72
+  #define gripRestAngle 95
+  boolean holding = false;
   
   //Front sensor Initialization
   #define sensorBuff 3
@@ -21,10 +24,6 @@
 
   //Brytare
   #define breakSwitch A0
-
-  // För avståndssensorn (IR-PIN) 
-
-  
 
 // Wheel drive initialization
 Servo leftServo;  //when looking in driving direction
@@ -45,20 +44,27 @@ int cylinderCount = 0;
 
 void setup()
 {
-//lineSensorSetup();
-//wheelServoSetup();
-gripServoSetup();
-//frontSensorSetup();
+  sideSensorSetup();
+  lineSensorSetup();
+  wheelServoSetup();
+  gripServoSetup();
+  frontSensorSetup();
 }
 
 void loop()
 {
-liftTest();
+  //  gripTest();
+  //sideSensorLoop();
+//gripTest();
 //sensorCheck(); 
-//lineReader();
-
+lineReader();
+//frontDistanceCheck();
 //
-//if(frontDistanceCheck()){
+if(frontSwitch()&& !holding){
+  Serial.print("<hello");
+  gripTop();
+//  testGrip();
+}
 //  
 //  if (cylinderCount < 2){
 //    gripTop();
