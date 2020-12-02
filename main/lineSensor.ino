@@ -90,32 +90,41 @@ void sensorCheck(){
 void lineReader() {
     posValue = qtr.readLineBlack(sensorValues);
      if(posValue == 0){
+      hasLine = false;
+      // Raise flag line lost
       Serial.println("Outside right");
-      outsideRight();
+      //outsideRight();
     }
      if(posValue < 1000 && posValue > 0){
+      hasLine = true;
       Serial.println("Strong right");
       strongRight();
     }
      if(posValue > 1000 && posValue <2000){
+      hasLine = true;
       Serial.println("Slight right");
       slightRight();
     }
     if(posValue > 2000 && posValue <4000){
+      hasLine = true;
       Serial.println("Forward");
       forward();
     }
     if(posValue > 4000 && posValue <5500){
+      hasLine = true;
       Serial.println("Slight left");
       slightLeft();
     }
     if(posValue > 5500 && posValue <7000){
+      hasLine = true;
       Serial.println("Strong left");
       strongLeft();
     }
     if(posValue == 7000){
+      hasLine = false;
+      // Raise flag lost line
       Serial.println("Outside left");
-      outsideLeft();
+      //outsideLeft();
     }
     delay(50);
 }

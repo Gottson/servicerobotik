@@ -34,9 +34,14 @@ QTRSensors qtr;
 const uint8_t SensorCount = 8;
 uint16_t sensorValues[SensorCount];
 uint16_t posValue;
+boolean hasLine = true;
 
 //Side sensors init
 HCSR04 hc(16,new int[2]{17,18},2);
+#define rightLimit 22
+#define leftLimit 22
+#define forwardDelay 400
+#define turnDelay 1000
 //initialisation of class HCSR04 (trig pin , echo pin, number of sensor)
 
 //Maze logic
@@ -60,6 +65,9 @@ void loop()
 lineReader();
 //frontDistanceCheck();
 //
+if(!hasLine){
+  sideSensorCheck();
+}
 if(frontSwitch()&& !holding){
   Serial.print("<hello");
   gripTop();
