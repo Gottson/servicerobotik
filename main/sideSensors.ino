@@ -20,25 +20,30 @@ void sideSensorLoop() {
 void sideSensorCheck(){
   rightVal = hc.dist(1);
   leftVal = hc.dist(0);
-  if(rightVal < rightLimit && leftVal>leftLimit){
+  if(rightVal <= rightLimit && leftVal > leftLimit){
     //Vi har vägg till höger inte vänster
     //Sväng vänster.
-    foward();
+    forward();
     delay(forwardDelay);
+    Serial.println("left");
     strongLeft();
-  }else if(leftVal < leftLimit && rightVal > rightLimit){
+    delay(turnDelay);
+  }else if(leftVal <= leftLimit && rightVal > rightLimit){
     // Vi har vägg till vänster, inte till höger
     // Sväng höger
     forward();
     delay(forwardDelay);
+    Serial.println("right");
     strongRight();
+    delay(turnDelay);
   }
-  else if(leftVal < leftLimit && rightVal < rightLimit){
+  else if(leftVal <= leftLimit && rightVal <= rightLimit){
     // vägg vänster och höger.
     // Titta om vägg är framför ta beslut efter det.
     // if(frontCheck());
     outsideRight();
-    delay(turnDelay);
+    Serial.println("nothing");
+    delay(turnRoundDelay);
     
   }
 }
