@@ -10,7 +10,7 @@
   #define liftPin 6
   #define gripPin 5
   #define restAngle 135
-  #define liftAngle 25
+  #define liftAngle 30
   #define gripAngle 72
   #define gripRestAngle 95
   boolean holding = false;
