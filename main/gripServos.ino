@@ -9,17 +9,13 @@ void gripServoSetup() {
   delay(15);
   grip_servo.write(gripRestAngle);
 }
-//Upp i gradantal kniper åt. Stänger på 98 atm
-//Upp i gradantal sänker klon.
 
 
-void gripTop() {
-  Serial.println("GRIP TOP"); 
-  //slowForward();
-  stop();
-  delay(900);
-  
+
+void collectCylinder() {
+
     stop();
+    delay(500);
     _grip();
     _lift();
     _unGrip(); 
@@ -27,22 +23,16 @@ void gripTop() {
  
 }
 
-void gripperDriveMode(){
+void gripperUp(){
   _grip();
   _lift();
 }
 
- void gripHold() {
-  Serial.println("GRIP HOLD"); 
-//  slowForward();
-//  delay(500);
-//  if(frontSwitch())
-//  {
+ void holdCylinder() {
     stop();
     _grip();
     delay(500);
     lift_servo.write(restAngle-15);
-//  }
 }
 
 void _grip(){
@@ -74,11 +64,3 @@ void _unLift(){
       delay(10);
     }
   }
-
-void gripTest(){
-  grip_servo.write(80);
-  delay(50);
-  lift_servo.write(restAngle);
-  
-  
-}

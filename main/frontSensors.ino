@@ -2,7 +2,7 @@ int last;
 
 void frontSensorSetup(){
 
-  //Switch
+  //Front Switch
   pinMode(INPUT, breakSwitch);
 
   //Distance sensor
@@ -13,7 +13,8 @@ void frontSensorSetup(){
   last = 0;
 }
 
-
+// 85 volt isch 14 cm
+// Sets wallInFront to false or true depending on measurements from front sensor
 void frontDistanceCheck(){
   front_dist = analogRead(IRPin);
   avgDist[last] = front_dist;
@@ -22,23 +23,11 @@ void frontDistanceCheck(){
     last = 0;
   }
   int avg = _avgDist(avgDist);
-  //Serial.println("Avg. Dist:" + _avgDist(avgDist));
-  //delay(50);
   if(avg > distance_limit){
-   // Serial.println("WALL"); 
-    //Serial.print("Front: ");
-    //Serial.println(avg); 
     wallInFront = true;
-
   }else{
-   // Serial.println("CLEAR"); 
-    //Serial.print("Front: ");
-    //Serial.println(avg); 
     wallInFront = false;
-  
   }
-  // 85 volt isch 14 cm
-  
 }
 
 int _avgDist(int dist[]){
@@ -47,9 +36,9 @@ int _avgDist(int dist[]){
     avg += avgDist[i];
   }
   return avg/sensorBuff; 
-  
 }
 
+//Returns value of front switch
 boolean frontSwitch(){
   if (digitalRead(breakSwitch)){
     return false;
@@ -57,5 +46,4 @@ boolean frontSwitch(){
   else{
     return true;
   }
-  
  }

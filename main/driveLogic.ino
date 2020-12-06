@@ -1,11 +1,12 @@
+//Called when line is lost. Sets custom drive patterns for a certain time.
 void noLineHandler(){
-  if (wallLeft && !wallRight) { // skapa en boolean, hasLine . tillåts bara att gå in i denna när hasLine == False
+  if (wallLeft && !wallRight) { 
   forward();
   delay(1000);
   slightRight();
   delay(2000);
 }
-if (!wallLeft && wallRight) { // skapa en boolean, hasLine . tillåts bara att gå in i denna när hasLine == False
+if (!wallLeft && wallRight) { 
   forward();
   delay(1000);
   slightLeft();

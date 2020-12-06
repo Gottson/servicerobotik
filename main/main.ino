@@ -4,31 +4,31 @@
 
 
 // Gripper Initialization
-  // Servo_lift
-  Servo grip_servo;
-  Servo lift_servo;
-  #define liftPin 6
-  #define gripPin 5
-  #define restAngle 135
-  #define liftAngle 30
-  #define gripAngle 72
-  #define gripRestAngle 95
-  boolean holding = false;
-  
-  //Front sensor Initialization
-  #define sensorBuff 3
-  #define IRPin A1
-  int avgDist[sensorBuff];
-  uint8_t distance_limit = 50;
-  uint8_t front_dist;
-  boolean wallInFront = false;
 
-  //Brytare
-  #define breakSwitch A0
+Servo grip_servo;
+Servo lift_servo;
+#define liftPin 6
+#define gripPin 5
+#define restAngle 135 //Upp i gradantal sänker klon.
+#define liftAngle 30
+#define gripAngle 72 //Ned i gradantal kniper åt.
+#define gripRestAngle 95
+boolean holding = false;
+  
+//Front sensor Initialization
+#define sensorBuff 3
+#define IRPin A1
+int avgDist[sensorBuff];
+uint8_t distance_limit = 50;
+uint8_t front_dist;
+boolean wallInFront = false;
+
+//Brytare
+#define breakSwitch A0
 
 // Wheel drive initialization
-Servo leftServo;  //when looking in driving direction
-Servo rightServo;  
+Servo leftServo;   //when looking in driving direction
+Servo rightServo;  //when looking in driving direction
 
 // Line sensor initialization
 QTRSensors qtr;
@@ -55,7 +55,7 @@ void setup()
   gripServoSetup();
   frontSensorSetup();
   
-  gripperDriveMode();
+  gripperUp();
 }
 
 void loop()
