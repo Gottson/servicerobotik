@@ -4,7 +4,7 @@ void wheelServoSetup(){
 }
 
 void forward(){
-  leftServo.write(83);
+  leftServo.write(80);
   rightServo.write(100);
   delay(15);  
 }
@@ -12,6 +12,7 @@ void forward(){
 void slowForward(){
   leftServo.write(85);
   rightServo.write(95);
+  delay(15);
 }
 
 void stop(){
@@ -20,42 +21,42 @@ void stop(){
 }
 
 void slightRight(){
-  leftServo.write(81);
-  rightServo.write(100);
+  leftServo.write(80);
+  rightServo.write(97);
    delay(15);  
 }
 
 void strongRight(){
  leftServo.write(80);
-  rightServo.write(98);
+  rightServo.write(93);
 
    delay(15);  
 }
 
-void outsideRight(){
- leftServo.write(83);
-  rightServo.write(90);
+void rotateRight(){
+ leftServo.write(85);
+  rightServo.write(85);
 
    delay(15);  
 }
 
 void slightLeft(){
  leftServo.write(83);
-  rightServo.write(102);
+  rightServo.write(100);
 
    delay(15);  
 }
 
 void strongLeft(){
- leftServo.write(85);
-  rightServo.write(103);
+ leftServo.write(87);
+  rightServo.write(100);
 
    delay(15);  
 }
 
-void outsideLeft(){
- leftServo.write(90);
-  rightServo.write(100);
+void rotateLeft(){
+ leftServo.write(95);
+  rightServo.write(95);
 
    delay(15);  
 }

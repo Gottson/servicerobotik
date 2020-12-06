@@ -14,7 +14,7 @@ void frontSensorSetup(){
 }
 
 
-boolean frontDistanceCheck(){
+void frontDistanceCheck(){
   front_dist = analogRead(IRPin);
   avgDist[last] = front_dist;
   last += 1;
@@ -23,16 +23,18 @@ boolean frontDistanceCheck(){
   }
   int avg = _avgDist(avgDist);
   //Serial.println("Avg. Dist:" + _avgDist(avgDist));
-  delay(250);
-  if(avg < distance_limit){
-    Serial.println("LOW"); 
-    Serial.println(avg); 
-    return true;
+  //delay(50);
+  if(avg > distance_limit){
+   // Serial.println("WALL"); 
+    //Serial.print("Front: ");
+    //Serial.println(avg); 
+    wallInFront = true;
 
   }else{
-    Serial.println("HIGH"); 
-    Serial.println(avg); 
-    return false;
+   // Serial.println("CLEAR"); 
+    //Serial.print("Front: ");
+    //Serial.println(avg); 
+    wallInFront = false;
   
   }
   // 85 volt isch 14 cm

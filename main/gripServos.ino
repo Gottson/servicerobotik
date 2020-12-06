@@ -27,6 +27,11 @@ void gripTop() {
  
 }
 
+void gripperDriveMode(){
+  _grip();
+  _lift();
+}
+
  void gripHold() {
   Serial.println("GRIP HOLD"); 
 //  slowForward();

@@ -4,14 +4,29 @@ void sideSensorSetup() {
   }
 
 
-//return curent distance in serial for sensor 1 to 6
-void sideSensorLoop() {
-    Serial.print("Left: ");
-    Serial.println(hc.dist(0));
-    delay(500);
-    Serial.print("Right: ");
-    Serial.println(hc.dist(1));
-    delay(500);
-    
+//hc.dist(0) is left distance sensor and 1 is right. Returns distance value in cm.
+void leftDistanceCheck() {
+
+
+   if(hc.dist(0)>side_distance_limit){
+    wallLeft = false;
   }
+
+   if(hc.dist(0)<side_distance_limit){
+    wallLeft = true;
+  }
+}
+
+void rightDistanceCheck() {
+
+   if(hc.dist(1)<side_distance_limit){
+    wallRight = true;
+  }
+
+   if(hc.dist(1)>side_distance_limit){
+    wallRight = false;
+  }
+  
+}
+
   
