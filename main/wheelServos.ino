@@ -1,6 +1,6 @@
 void wheelServoSetup(){
-  leftServo.attach(11);  // attaches the servos on pins
-  rightServo.attach(10);
+  leftServo.attach(10);  // attaches the servos on pins
+  rightServo.attach(11);
 }
 
 void forward(){
