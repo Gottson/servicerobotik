@@ -1,7 +1,6 @@
 int curr_angle;
 
 void gripServoSetup() {
-  Serial.begin(9600);
   lift_servo.attach(liftPin);
   //curr_angle = 80;
   lift_servo.write(restAngle);

@@ -14,6 +14,7 @@ Servo lift_servo;
 #define gripAngle 72 //Ned i gradantal kniper åt.
 #define gripRestAngle 95
 boolean holding = false;
+boolean gripLifted = false;
   
 //Front sensor Initialization
 #define sensorBuff 3
