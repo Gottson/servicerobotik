@@ -2,7 +2,7 @@
 void lineSensorSetup(){
 
   qtr.setTypeRC();
-  qtr.setSensorPins((const uint8_t[]){2, 3, 4, 7, 8, 9, 12, 13}, SensorCount);
+  qtr.setSensorPins((const uint8_t[]){7, 3, 4, 2, 13, 12, 9, 8}, SensorCount);
 
 
   delay(500);
