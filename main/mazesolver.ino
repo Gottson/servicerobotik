@@ -1,5 +1,20 @@
+//Choices [R,F], [L,F],[R,L] [R,L,F] =>> 0,1,2,3
+
+
+
 uint8_t leftCount = 0;
 uint8_t leftWayHome = 0;
+uint8_t currentMazeId = 0;
+
+
+void currentMazeSide (){
+    if(currentMazeId == 0){
+        mazeRightSide();
+    } else{
+        mazeLeftSide();
+    }
+}
+
 
 
 void mazeLeftSide(int choices){
