@@ -65,7 +65,7 @@ void loop()
 
 
 lineDriveCommander();
-if(frontSwitch() && digitalRead(breakSwitch)){
+if(frontSwitch() && (holding == false)){
   // Griplogic
 }
 
