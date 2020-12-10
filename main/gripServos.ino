@@ -16,13 +16,9 @@ void collectCylinder() {
     stop();
     delay(500);
     _grip();
-    delay(50);
     _lift();
-    delay(50);
-    _unGrip();
-    delay(50); 
-    _unLift();
-    delay(50); 
+    _unGrip(); 
+    _unLift(); 
  
 }
 
@@ -55,6 +51,7 @@ void _unGrip(){
 }
   
 void _lift(){
+  gripLifted = true;
     for(int i = restAngle; i >= liftAngle; i--){
       lift_servo.write(i);
       delay(10);
@@ -62,6 +59,7 @@ void _lift(){
 }
 
 void _unLift(){
+  gripLifted = false;
     for(int i = liftAngle; i <= restAngle; i++){
       lift_servo.write(i);
       delay(10);

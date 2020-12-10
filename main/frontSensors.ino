@@ -40,10 +40,5 @@ int _avgDist(int dist[]){
 
 //Returns value of front switch
 boolean frontSwitch(){
-  if (digitalRead(breakSwitch)){
-    return false;
-  }
-  else{
-    return true;
-  }
+  return !digitalRead(breakSwitch);
  }
