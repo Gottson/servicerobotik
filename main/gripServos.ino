@@ -13,12 +13,16 @@ void gripServoSetup() {
 
 void collectCylinder() {
 
-    stop();
+    //stay();
     delay(500);
     _grip();
+    delay(500);
     _lift();
-    _unGrip(); 
-    _unLift(); 
+    delay(500);
+    _unGrip();
+    delay(500); 
+    _unLift();
+    delay(500); 
  
 }
 
@@ -28,7 +32,7 @@ void gripperUp(){
 }
 
  void holdCylinder() {
-    stop();
+    stay();
     _grip();
     delay(500);
     lift_servo.write(restAngle-15);

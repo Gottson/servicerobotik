@@ -15,7 +15,7 @@ void slowForward(){
   delay(15);
 }
 
-void stop(){
+void stay(){
   leftServo.write(90);
   rightServo.write(90);
 }
@@ -28,7 +28,7 @@ void slightRight(){
 
 void strongRight(){
  leftServo.write(80);
-  rightServo.write(93);
+  rightServo.write(90);
 
    delay(15);  
 }
@@ -48,7 +48,7 @@ void slightLeft(){
 }
 
 void strongLeft(){
- leftServo.write(87);
+ leftServo.write(90);
   rightServo.write(100);
 
    delay(15);  

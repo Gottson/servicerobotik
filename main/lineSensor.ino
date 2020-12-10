@@ -40,45 +40,61 @@ void lineDriveCommander() {
   
     posValue = qtr.readLineBlack(sensorValues);
     if(posValue < 2 ){
-      Serial.println("Linehandler 1");
+      if(!turnIgnore){
       noLineHandler();
+      }
+      turnIgnore = true;
     }
-     if(posValue < 500 && posValue > 1 ){
-      Serial.println("Outside right");
+     if(posValue < 1000 && posValue > 1 ){
       rotateRight();
     }
-     if(posValue < 2000 && posValue > 500){
-      Serial.println("Strong right");
+     if(posValue < 2000 && posValue > 1000){
+      if(!turnIgnore){
+      turnHandler();
+      }
+      turnIgnore = true;
       strongRight();
     }
      if(posValue > 2000 && posValue <3000){
-      Serial.println("Slight right");
       slightRight();
     }
     if(posValue > 3000 && posValue <3400){
-      Serial.println("Forward");
       forward();
+      turnIgnore = false;
     }
-    if(posValue > 3400 && posValue <4800){
-      Serial.println("Slight left");
+    if(posValue > 3400 && posValue <4500){
+      if (posValue == 3500){
+          delay(15);
+        if (qtr.readLineBlack(sensorValues) == 3500){
+        if (!turnIgnore){
+          intersectionHandler();
+          turnIgnore=true;
+
+        }
+        }        
+      }
       slightLeft();
     }
-    if(posValue > 4800 && posValue <6500){
-      Serial.println("Strong left");
+    if(posValue > 4500 && posValue <6000){
+      if (!turnIgnore){
+      turnHandler();
+      }
+      turnIgnore = true;
       strongLeft();
     }
-    if(posValue > 6500 && posValue < 6999){
-      Serial.println("Outside left");
+    if(posValue > 6000 && posValue < 7000){
       rotateLeft();
     }
-    if(posValue > 6998 ){
-      Serial.println("Linehandler 7000");
-      noLineHandler();
+    if(posValue > 6999 ){
+      if(!turnIgnore){
+         noLineHandler();
+      }
+      turnIgnore = true;
     }
     
     delay(50);
 }
 
 boolean hasLine(){
-  return (7000>qtr.readLineBlack(sensorValues) || qtr.readLineBlack(sensorValues)==0);
+  return (7000==qtr.readLineBlack(sensorValues) || qtr.readLineBlack(sensorValues)==0);
 }

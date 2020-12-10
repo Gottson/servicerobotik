@@ -5,26 +5,26 @@ void sideSensorSetup() {
 
 
 //hc.dist(0) is left distance sensor and 1 is right. Returns distance value in cm.
-void leftDistanceCheck() {
+boolean wallLeft() {
 
 
    if(hc.dist(0)>side_distance_limit){
-    wallLeft = false;
+    return false;
   }
 
    if(hc.dist(0)<side_distance_limit){
-    wallLeft = true;
+    return true;
   }
 }
 
-void rightDistanceCheck() {
+boolean wallRight() {
 
    if(hc.dist(1)<side_distance_limit){
-    wallRight = true;
+    return true;
   }
 
    if(hc.dist(1)>side_distance_limit){
-    wallRight = false;
+    return false;
   }
   
 }

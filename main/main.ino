@@ -42,11 +42,14 @@ uint16_t posValue;
 HCSR04 hc(16,new int[2]{17,18},2);
 //initialisation of class HCSR04 (trig pin , echo pin, number of sensor)
 uint8_t side_distance_limit = 14;
-boolean wallLeft = false;
-boolean wallRight = false;
+//boolean wallLeft = false;
+//boolean wallRight = false;
 
 //Maze logic
 int cylinderCount = 0;
+
+//
+boolean turnIgnore = false;
 
 void setup()
 {
@@ -56,18 +59,20 @@ void setup()
   gripServoSetup();
   frontSensorSetup();
   
-  gripperUp();
+  ///gripperUp();
 }
 
 void loop()
 {
 
-
-
 lineDriveCommander();
-if(frontSwitch() && (holding == false)){
-  // Griplogic
-}
+//Serial.println(hc.dist(0));
+//Serial.println(hc.dist(1));
+//delay(1000);
+
+//if(frontSwitch()){
+//  collectCylinder();
+//}
 
 
 }
