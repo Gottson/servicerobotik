@@ -16,9 +16,13 @@ void collectCylinder() {
     stop();
     delay(500);
     _grip();
+    delay(50);
     _lift();
-    _unGrip(); 
-    _unLift(); 
+    delay(50);
+    _unGrip();
+    delay(50); 
+    _unLift();
+    delay(50); 
  
 }
 
