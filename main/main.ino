@@ -55,7 +55,7 @@ void setup()
   gripServoSetup();
   frontSensorSetup();
   
-  gripperUp();
+  //gripperUp();
 }
 
 void loop()
@@ -64,6 +64,10 @@ void loop()
 
 
 lineDriveCommander();
+
+if (frontSwitch()){
+  collectCylinder();
+}
 
 
 }
