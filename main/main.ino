@@ -10,9 +10,9 @@ Servo lift_servo;
 #define liftPin 6
 #define gripPin 5
 #define restAngle 135 //Upp i gradantal sänker klon.
-#define liftAngle 30
-#define gripAngle 72 //Ned i gradantal kniper åt.
-#define gripRestAngle 95
+#define liftAngle 20
+#define gripAngle 55 //Ned i gradantal kniper åt.
+#define gripRestAngle 85
 boolean holding = false;
   
 //Front sensor Initialization
