@@ -11,7 +11,7 @@ void currentMazeSide (){
     if(currentMazeId == 0){
         mazeRightSide();
     } else{
-        mazeLeftSide();
+        mazeLeftSide(1);
     }
 }
 
