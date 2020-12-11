@@ -8,6 +8,11 @@ void forward(){
   rightServo.write(100);
   delay(15);  
 }
+void backward(){
+    leftServo.write(100);
+    rightServo.write(80);
+    delay(15);
+}
 
 void slowForward(){
   leftServo.write(85);
