@@ -1,54 +1,65 @@
 //Called when line is lost. Sets custom drive patterns for a certain time.
 void noLineHandler() {
-    Serial.println("Lost line");
-    if (wallLeft() && wallRight() && !wallInFront()) {
-        Serial.println("Wall left and right, clear forward, go forward");
-        forward();
-        delay(50);
-        //turnIgnore = false;
-    }
+checkFrontSensorsLostLine();
 }
 
 void checkFrontSensorsLostLine(){
+  Serial.println("checkFrontSensorsLostLine");
     stay();
     delay(1000);
     while (!wallInFront()){
         Serial.println("Forward in wall left");
-        forward();
+        slowForward();
         delay(50);
     }
     checkWallSensorsLostLine();
 }
 
-void checkWallSensorsLostLine(){
 
+void checkWallSensorsLostLine(){
+Serial.println("checkWallSensorsLostLine");
     if(wallLeft() && !wallRight()){
-        rotateRight();
+        strongRight();
         delay(1500);
         forwardTillHasLine();
     } else if (!wallLeft() && wallRight()){
-        rotateLeft();
+        strongLeft();
         delay(1500);
         forwardTillHasLine();
-    } else if (!wallLeft() && !wallRight()){
+    } else if (wallLeft() && wallRight()){
+        // U-Svängen
+        stay(); 
+        lift(); 
+        rotateRight();
+        delay(3000);
+        while(wallInFront()){
+          rotateRight();
+          delay(50);
+        }
         stay();
-        delay(5000);
+        unLift();
     }
 }
 
 void forwardTillHasLine(){
+  Serial.println("forwardTillHasLine");
     while(!hasLine()){
-        forward();
+        slowForward();
         delay(50);
     }
 }
 
 
 void findLine(){
+  Serial.println("findLine");
     while(!hasLine()){
+      Serial.println("in findLine loop");
         backward();
-        delay(50);
+        delay(500);
+        stay();
+        delay(500);
     }
+    Serial.println("left while findLine");
 }
 
 

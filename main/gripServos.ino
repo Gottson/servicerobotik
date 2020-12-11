@@ -15,30 +15,30 @@ void collectCylinder() {
 
     //stay();
     delay(500);
-    _grip();
+    grip();
     delay(500);
-    _lift();
+    lift();
     delay(500);
-    _unGrip();
+    unGrip();
     delay(500); 
-    _unLift();
+    unLift();
     delay(500); 
  
 }
 
 void gripperUp(){
-  _grip();
-  _lift();
+  grip();
+  lift();
 }
 
  void holdCylinder() {
     stay();
-    _grip();
+    grip();
     delay(500);
     lift_servo.write(restAngle-15);
 }
 
-void _grip(){
+void grip(){
   for(int i = gripRestAngle; i >= gripAngle; i--){
     grip_servo.write(i);
     delay(10);
@@ -46,7 +46,7 @@ void _grip(){
     holding = true;
 }
 
-void _unGrip(){
+void unGrip(){
    for(int i = gripAngle; i <= gripRestAngle; i++){
     grip_servo.write(i);
     delay(10);
@@ -54,7 +54,7 @@ void _unGrip(){
   holding = false;
 }
   
-void _lift(){
+void lift(){
   gripLifted = true;
     for(int i = restAngle; i >= liftAngle; i--){
       lift_servo.write(i);
@@ -62,7 +62,7 @@ void _lift(){
     }
 }
 
-void _unLift(){
+void unLift(){
   gripLifted = false;
     for(int i = liftAngle; i <= restAngle; i++){
       lift_servo.write(i);

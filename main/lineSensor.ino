@@ -6,8 +6,8 @@ void lineSensorSetup(){
 
 
   delay(500);
-  pinMode(LED_BUILTIN, OUTPUT);
-  digitalWrite(LED_BUILTIN, HIGH); // turn on Arduino's LED to indicate we are in calibration mode
+  //pinMode(LED_BUILTIN, OUTPUT);
+  //digitalWrite(LED_BUILTIN, HIGH); // turn on Arduino's LED to indicate we are in calibration mode
 
   // Call calibrate() 400 times to make calibration take about 10 seconds.
  
@@ -15,7 +15,7 @@ void lineSensorSetup(){
   {
     qtr.calibrate();
   }
-  digitalWrite(LED_BUILTIN, LOW); // turn off Arduino's LED to indicate we are through with calibration
+  //digitalWrite(LED_BUILTIN, LOW); // turn off Arduino's LED to indicate we are through with calibration
 
 
 }
@@ -39,11 +39,12 @@ void sensorCheck(){
 void lineDriveCommander() {
   
     posValue = qtr.readLineBlack(sensorValues);
+    
     if(posValue < 2 ){
-    //  if(!turnIgnore){
-     // turnIgnore = true;
+      if(!turnIgnore){
+      turnIgnore = true;
       noLineHandler();
-     // }
+      }
       
     }
      if(posValue < 1000 && posValue > 1 ){
@@ -58,6 +59,7 @@ void lineDriveCommander() {
     }
      if(posValue > 2000 && posValue <3000){
       slightRight();
+      //turnIgnore = false;
     }
     if(posValue > 3000 && posValue <3400){
       forward();
@@ -74,6 +76,7 @@ void lineDriveCommander() {
         }
         }        
       }
+      //turnIgnore = false;
       slightLeft();
     }
     if(posValue > 4500 && posValue <6000){
@@ -87,10 +90,10 @@ void lineDriveCommander() {
       rotateLeft();
     }
     if(posValue > 6999 ){
-      //if(!turnIgnore){
-        // turnIgnore = true;
+      if(!turnIgnore){
+         turnIgnore = true;
          noLineHandler();
-     // }
+      }
 
     }
     
@@ -98,5 +101,6 @@ void lineDriveCommander() {
 }
 
 boolean hasLine(){
-  return (7000==qtr.readLineBlack(sensorValues) || qtr.readLineBlack(sensorValues)==0);
+  Serial.println(qtr.readLineBlack(sensorValues));
+  return (0>qtr.readLineBlack(sensorValues)<7000);
 }

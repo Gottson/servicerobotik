@@ -4,8 +4,8 @@ void wheelServoSetup(){
 }
 
 void forward(){
-  leftServo.write(80);
-  rightServo.write(100);
+  leftServo.write(75);
+  rightServo.write(105);
   delay(15);  
 }
 void backward(){
@@ -65,3 +65,8 @@ void rotateLeft(){
 
    delay(15);  
 }
+
+void uTurn(){
+ leftServo.write(95);
+  rightServo.write(95);
+  }
