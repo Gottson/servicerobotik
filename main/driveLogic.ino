@@ -1,28 +1,44 @@
 //Called when line is lost. Sets custom drive patterns for a certain time.
 void noLineHandler(){
-  Serial.print("Lost line");
-
-  
-if (wallLeft() && !wallRight()) { 
-  Serial.print("Wall left, Turn right");
+  Serial.println("Lost line");
+if (wallLeft() && wallRight()){
   forward();
+  delay(50);
+  turnIgnore = false;
+}
+  
+else if (wallLeft() && !wallRight()) { 
+  Serial.println("Wall left, Turn right");
+  stay();
   delay(1000);
+  while (!wallInFront){
+    Serial.println("Forward in wall left");
+    forward();
+    delay(50);
+  }
+  
   strongRight();
   delay(1500);
 
 }
-if (!wallLeft() && wallRight()) { 
-  Serial.print("Wall right, Turn left");
-  forward();
+else if (!wallLeft() && wallRight()) { 
+  Serial.println("Wall right, Turn left");
+  stay();
   delay(1000);
+  while (!wallInFront){
+    Serial.println("Forward in wall right");
+    forward();
+    delay(50);
+  }
   strongLeft();
   delay(1500);
 
 }
 
-if (wallInFront && wallRight() && wallLeft()){
-  //BACKA
-  //delay(3000);
+else if (wallInFront() && wallRight() && wallLeft()){
+  Serial.println("Wall right, left and front");
+  rotateRight();
+  delay(4000);
 }
 }
 

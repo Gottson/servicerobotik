@@ -20,9 +20,9 @@ boolean gripLifted = false;
 #define sensorBuff 3
 #define IRPin A1
 int avgDist[sensorBuff];
-uint8_t distance_limit = 50;
+uint8_t distance_limit = 85;
 uint8_t front_dist;
-boolean wallInFront = false;
+//boolean wallInFront = false;
 
 //Brytare
 #define breakSwitch A0
@@ -49,7 +49,7 @@ uint8_t side_distance_limit = 14;
 int cylinderCount = 0;
 
 //
-boolean turnIgnore = false;
+boolean turnIgnore = true;
 
 void setup()
 {
@@ -64,7 +64,9 @@ void setup()
 
 void loop()
 {
-
+//  Serial.println(wallInFront());
+//  Serial.println(analogRead(IRPin));
+//  delay(250);
 lineDriveCommander();
 //Serial.println(hc.dist(0));
 //Serial.println(hc.dist(1));

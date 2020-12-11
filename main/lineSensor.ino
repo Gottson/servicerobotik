@@ -41,9 +41,10 @@ void lineDriveCommander() {
     posValue = qtr.readLineBlack(sensorValues);
     if(posValue < 2 ){
       if(!turnIgnore){
+      turnIgnore = true;
       noLineHandler();
       }
-      turnIgnore = true;
+      
     }
      if(posValue < 1000 && posValue > 1 ){
       rotateRight();
@@ -87,9 +88,10 @@ void lineDriveCommander() {
     }
     if(posValue > 6999 ){
       if(!turnIgnore){
+         turnIgnore = true;
          noLineHandler();
       }
-      turnIgnore = true;
+
     }
     
     delay(50);

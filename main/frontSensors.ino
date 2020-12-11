@@ -15,7 +15,7 @@ void frontSensorSetup(){
 
 // 85 volt isch 14 cm
 // Sets wallInFront to false or true depending on measurements from front sensor
-void frontDistanceCheck(){
+boolean wallInFront(){
   front_dist = analogRead(IRPin);
   avgDist[last] = front_dist;
   last += 1;
@@ -24,9 +24,9 @@ void frontDistanceCheck(){
   }
   int avg = _avgDist(avgDist);
   if(avg > distance_limit){
-    wallInFront = true;
+    return true;
   }else{
-    wallInFront = false;
+    return false;
   }
 }
 
