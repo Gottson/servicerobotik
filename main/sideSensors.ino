@@ -1,50 +1,32 @@
-uint8_t rightVal;
-uint8_t leftVal;
 void sideSensorSetup() { 
 
   Serial.begin(9600); 
   }
 
 
-//return curent distance in serial for sensor 1 to 6
-void sideSensorLoop() {
-    Serial.print("Left: ");
-    Serial.println(hc.dist(0));
-    delay(500);
-    Serial.print("Right: ");
-    Serial.println(hc.dist(1));
-    delay(500);
-    
+//hc.dist(0) is left distance sensor and 1 is right. Returns distance value in cm.
+boolean wallLeft() {
+
+
+   if(hc.dist(0)>side_distance_limit){
+    return false;
   }
 
-void sideSensorCheck(){
-  rightVal = hc.dist(1);
-  leftVal = hc.dist(0);
-  if(rightVal <= rightLimit && leftVal > leftLimit){
-    //Vi har vägg till höger inte vänster
-    //Sväng vänster.
-    forward();
-    delay(forwardDelay);
-    Serial.println("left");
-    strongLeft();
-    delay(turnDelay);
-  }else if(leftVal <= leftLimit && rightVal > rightLimit){
-    // Vi har vägg till vänster, inte till höger
-    // Sväng höger
-    forward();
-    delay(forwardDelay);
-    Serial.println("right");
-    strongRight();
-    delay(turnDelay);
-  }
-  else if(leftVal <= leftLimit && rightVal <= rightLimit){
-    // vägg vänster och höger.
-    // Titta om vägg är framför ta beslut efter det.
-    // if(frontCheck());
-    outsideRight();
-    Serial.println("nothing");
-    delay(turnRoundDelay);
-    
+   if(hc.dist(0)<side_distance_limit){
+    return true;
   }
 }
+
+boolean wallRight() {
+
+   if(hc.dist(1)<side_distance_limit){
+    return true;
+  }
+
+   if(hc.dist(1)>side_distance_limit){
+    return false;
+  }
+  
+}
+
   

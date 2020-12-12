@@ -1,61 +1,83 @@
 void wheelServoSetup(){
-  leftServo.attach(11);  // attaches the servos on pins
-  rightServo.attach(10);
+  leftServo.attach(10);  // attaches the servos on pins
+  rightServo.attach(11);
 }
 
 void forward(){
-  leftServo.write(73);
-  rightServo.write(110);
+  leftServo.write(75);
+  rightServo.write(105);
   delay(15);  
+}
+void backward(){
+    leftServo.write(100);
+    rightServo.write(80);
+    delay(15);
 }
 
 void slowForward(){
-  leftServo.write(85);
+  leftServo.write(83);
   rightServo.write(95);
+  delay(15);
 }
 
-void stop(){
+void stay(){
   leftServo.write(90);
   rightServo.write(90);
 }
 
 void slightRight(){
-  leftServo.write(70);
-  rightServo.write(105);
+  leftServo.write(80);
+  rightServo.write(97);
    delay(15);  
 }
 
 void strongRight(){
- leftServo.write(60);
-  rightServo.write(98);
-
-   delay(15);  
-}
-
-void outsideRight(){
- leftServo.write(70);
+ leftServo.write(80);
   rightServo.write(90);
 
    delay(15);  
 }
 
+void rotateRight(){
+ leftServo.write(85);
+  rightServo.write(85);
+
+   delay(15);  
+}
+
 void slightLeft(){
- leftServo.write(73);
-  rightServo.write(115);
+ leftServo.write(83);
+  rightServo.write(100);
 
    delay(15);  
 }
 
 void strongLeft(){
- leftServo.write(85);
-  rightServo.write(115);
-
-   delay(15);  
-}
-
-void outsideLeft(){
  leftServo.write(90);
-  rightServo.write(110);
+  rightServo.write(100);
 
    delay(15);  
 }
+
+void rotateLeft(){
+ leftServo.write(95);
+  rightServo.write(95);
+
+   delay(15);  
+}
+
+void uTurn(){
+ leftServo.write(95);
+  rightServo.write(95);
+  }
+
+
+void detachServ(){
+  leftServo.detach(); // attaches the servos on pins
+  rightServo.detach();
+  }
+
+void attachServ(){
+  leftServo.attach(10); // attaches the servos on pins
+  rightServo.attach(11);
+  }
