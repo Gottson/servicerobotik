@@ -65,6 +65,8 @@ void setup()
 void loop()
 {
 lineDriveCommander();
+//sensorCheck();
+
 
 
 }

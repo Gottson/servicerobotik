@@ -39,67 +39,55 @@ void sensorCheck(){
 void lineDriveCommander() {
   
     posValue = qtr.readLineBlack(sensorValues);
-    
-    if(posValue < 2 ){
-      if(!turnIgnore){
-      turnIgnore = true;
-      noLineHandler();
+    if  (leftEndSensor()){
+      if (!wallInFront()){
+        Serial.println("Välja fram eller vänster");
+      }
+      
+    }
+        if  (rightEndSensor()){
+      if (!wallInFront()){
+        Serial.println("Välja fram eller höger");
       }
       
     }
 
     
+    if(posValue < 2 ){
+      
+      noLineHandler();
+      
+    }    
      if(posValue < 1000 && posValue > 1 ){
       rotateRight();
     }
-
-
-    
      if(posValue < 2000 && posValue > 1000){
-      if(!turnIgnore){
-      turnHandler();
-      }
-      turnIgnore = true;
+
       strongRight();
     }
      if(posValue > 2000 && posValue <3000){
       slightRight();
-      turnIgnore = false;
+      //turnIgnore = false;
     }
     if(posValue > 3000 && posValue <3400){
       forward();
-      turnIgnore = false;
+      //turnIgnore = false;
     }
     if(posValue > 3400 && posValue <4500){
-      if (posValue == 3500){
-          delay(15);
-        if (qtr.readLineBlack(sensorValues) == 3500){
-        if (!turnIgnore){
-          intersectionHandler();
-          turnIgnore=true;
 
-        }
-        }        
-      }
-      //turnIgnore = false;
       slightLeft();
     }
     if(posValue > 4500 && posValue <6000){
-      if (!turnIgnore){
-      turnHandler();
-      }
-      turnIgnore = true;
+
       strongLeft();
     }
     if(posValue > 6000 && posValue < 7000){
       rotateLeft();
     }
     if(posValue > 6999 ){
-      if(!turnIgnore){
-         turnIgnore = true;
-         noLineHandler();
-      }
-
+      
+      noLineHandler();
+      
     }
     
     delay(50);
@@ -109,3 +97,92 @@ boolean hasLine(){
   Serial.println(qtr.readLineBlack(sensorValues));
   return (0>qtr.readLineBlack(sensorValues)<7000);
 }
+
+boolean leftEndSensor(){
+  qtr.readLineBlack(sensorValues);
+  //Serial.println(sensorValues[7]);
+  if (sensorValues[7]>500){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+boolean rightEndSensor(){
+  qtr.readLineBlack(sensorValues);
+  //Serial.println(sensorValues[0]);
+  if (sensorValues[0]>500){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+//void lineDriveCommanderOld() {
+//  
+//    posValue = qtr.readLineBlack(sensorValues);
+//    
+//    if(posValue < 2 ){
+//      if(!turnIgnore){
+//      turnIgnore = true;
+//      noLineHandler();
+//      } 
+//    }    
+//     if(posValue < 1000 && posValue > 1 ){
+//      rotateRight();
+//    }
+//     if(posValue < 2000 && posValue > 1000){
+//      if(choiceCount()>1){
+//      if(!turnIgnore){
+//      turnHandler();
+//      }
+//      turnIgnore = true;
+//      }
+//      strongRight();
+//    }
+//     if(posValue > 2000 && posValue <3000){
+//      slightRight();
+//      turnIgnore = false;
+//    }
+//    if(posValue > 3000 && posValue <3400){
+//      forward();
+//      turnIgnore = false;
+//    }
+//    if(posValue > 3400 && posValue <4500){
+//      if (posValue == 3500){
+//          delay(15);
+//        if (qtr.readLineBlack(sensorValues) == 3500){
+//        if (!turnIgnore){
+//          intersectionHandler();
+//          turnIgnore=true;
+//
+//        }
+//        }        
+//      }
+//      //turnIgnore = false;
+//      slightLeft();
+//    }
+//    if(posValue > 4500 && posValue <6000){
+//       if(choiceCount()>1){
+//      if (!turnIgnore){
+//      turnHandler();
+//      }
+//      turnIgnore = true;
+//       }
+//      strongLeft();
+//    }
+//    if(posValue > 6000 && posValue < 7000){
+//      rotateLeft();
+//    }
+//    if(posValue > 6999 ){
+//      
+//      if(!turnIgnore){
+//         turnIgnore = true;
+//         noLineHandler();
+//      }
+//
+//    }
+//    
+//    delay(50);
+//}
+//

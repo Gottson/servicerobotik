@@ -93,10 +93,16 @@ void turnHandler() {
 
     
   } else if (!wallLeft() && wallRight()) {
+    if(getRightCount() == 3 && !wallInFront()){
+      forward();
+      delay(500);
+      incrementRight();
+      Serial.println(getRightCount());
+    }else{
     Serial.println("Wall right -> strong left");
     strongLeft();
     delay(1500);
-
+    }
     //if (!hasLine()) {
     ////  findLine();
     //}
@@ -120,4 +126,18 @@ void intersectionHandler() {
     //  }
   
    mazeRightSide();
+}
+
+int choiceCount(){
+  int i = 0;
+  if (!wallInFront()){
+    i ++;
+  }
+  if (!wallLeft()){
+    i++;
+  }
+  if (!wallRight()){
+    i++;
+  }
+  return i;
 }

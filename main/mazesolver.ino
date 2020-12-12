@@ -5,7 +5,7 @@
 uint8_t leftCount = 0;
 uint8_t leftWayHome = 0;
 uint8_t currentMazeId = 0;
-uint8_t rigthWay = 0;
+uint8_t rightWay = 0;
 
 
 void currentMazeSide (){
@@ -16,7 +16,12 @@ void currentMazeSide (){
     }
 }
 
-
+uint8_t getRightCount(){
+  return rightWay;
+}
+void incrementRight(){
+  rightWay++;
+}
 
 void mazeLeftSide(int choices){
     if (leftCount < 10) {
@@ -42,52 +47,52 @@ void mazeLeftSide(int choices){
 
 void mazeRightSide(){
 Serial.println("mazeRight");
-Serial.println(rigthWay);
-switch (rigthWay) {
+Serial.println(rightWay);
+switch (rightWay) {
   case 0:
     strongLeft();
     delay(1500);
-    rigthWay ++;
+    rightWay ++;
     break;
   case 1:
     strongLeft();
     delay(1500);
-    rigthWay ++;
+    rightWay ++;
     break;
   case 2:
     forward();
     delay(500);
-    rigthWay ++;
+    rightWay ++;
     break;
   case 3:
     forward();
     delay(500);
-    rigthWay ++;
+    rightWay ++;
     break;
   case 4:
     strongLeft();
     delay(1500);
-    rigthWay ++;
+    rightWay ++;
     break;
   case 5:
     strongLeft();
     delay(1500);
-    rigthWay ++;
+    rightWay ++;
     break;
   case 6:
     forward();
     delay(500);
-    rigthWay ++;
+    rightWay ++;
     break;
   case 7:
     strongRight();
     delay(1500);
-    rigthWay ++;
+    rightWay ++;
     break;
   case 8:
     strongLeft();
     delay(1500);
-    rigthWay ++;
+    rightWay ++;
     break;
 }
     //L
