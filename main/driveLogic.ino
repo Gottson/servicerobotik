@@ -72,66 +72,6 @@ void checkWallSensorsLostLine() {
 
 
 
-void turnHandler() {
-  detachServ();
-  Serial.println("turnHandler");
-  delay(500);
-  attachServ();
-  delay(10);
-  backward();
-  delay(90);
-  
-  if (wallLeft() && !wallRight()) {
-   
-    Serial.println("Wall left -> strong right");
-    strongRight();
-    delay(1500);
-   
-    
-//    
-//    if (!hasLine()) {
-//      findLine();
-//    }
-
-
-
-    
-  } else if (!wallLeft() && wallRight()) {
-    if(getRightCount() == 3 && !wallInFront()){
-      forward();
-      delay(500);
-      incrementRight();
-      Serial.println(getRightCount());
-    }else{
-    Serial.println("Wall right -> strong left");
-    strongLeft();
-    delay(1500);
-    }
-    //if (!hasLine()) {
-    ////  findLine();
-    //}
-  } else if (wallLeft() && wallRight()) {
-    Serial.println("Wall left and right. Go forward");
-    forward();
-    delay(50);
-  }
-
-
-}
-
-void intersectionHandler() {
-  detachServ();
-  Serial.println("intersectionhadler");
-  delay(1000);
-  attachServ();
-  //if (!wallLeft() && !wallRight()){
-  Serial.println("T-section, turning right"); 
-   
-    //  }
-  
-   mazeRightSide();
-}
-
 int choiceCount(){
   int i = 0;
   if (!wallInFront()){

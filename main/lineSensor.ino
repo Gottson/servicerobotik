@@ -1,16 +1,16 @@
-float Kp = 0; //set up the constants value
+float Kp = 0.013; //set up the constants value
 float Ki = 0;
-float Kd = 0;
+float Kd = 0.013;
 int P;
 int I;
 int D;
 //Set basevalues for straightline (a = left, b = right);
-int basespeeda = 105;
-int basespeedb = 105;
+int basespeeda = 120;
+int basespeedb = 120;
 
 //Increasing the maxspeed can damage the motors - at a value of 255 the 6V motors will receive 7,4 V 
-const uint8_t maxspeeda = 170;
-const uint8_t maxspeedb = 170;
+const uint8_t maxspeeda = 180;
+const uint8_t maxspeedb = 180;
 
 int lastError = 0;
 boolean onoff = false;
@@ -39,8 +39,7 @@ void lineSensorSetup(){
 
 void sensorCheck(){
  
-  
-  
+  posValue = qtr.readLineBlack(sensorValues);
   for (uint8_t i = 0; i < SensorCount; i++)
   {
     Serial.print(sensorValues[i]);
@@ -74,7 +73,7 @@ void PID_control() {
   
   int motorspeeda = basespeeda + motorspeed;
   int motorspeedb = basespeedb - motorspeed;
-
+  
   
   if (motorspeeda > maxspeeda) {
     motorspeeda = maxspeeda;
@@ -88,7 +87,9 @@ void PID_control() {
   if (motorspeedb < 0) {
     motorspeedb = 0;
   } 
-  motorspeeda = 180 - motorspeeda;
+   //motorspeedb = 180 - motorspeedb;
+   motorspeeda = 180 - motorspeeda;
+   
   _updatePWM(motorspeeda, motorspeedb);
   //Serial.print(motorspeeda);Serial.print(" ");Serial.println(motorspeedb);
 }
@@ -108,6 +109,12 @@ void _updatePWM(int motorspeeda, int motorspeedb){
     }else{
       leftServo.write(motorspeeda);
     }
+//    Serial.println("------------");
+//    Serial.println("Left:");
+//    Serial.println(motorspeeda);
+//    Serial.println("Right");
+//    Serial.println(motorspeedb);
+//    Serial.println("------------");
 }
 
 void hasLine(){
