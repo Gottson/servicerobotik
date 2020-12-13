@@ -25,11 +25,15 @@ void checkWallSensorsLostLine() {
   if (wallLeft() && !wallRight()) {
     strongRight();
     delay(1500);
-    forwardTillHasLine();
+    forward();
+    delay(1500);
+    //forwardTillHasLine();
   } else if (!wallLeft() && wallRight()) {
     strongLeft();
     delay(1500);
-    forwardTillHasLine();
+    //forwardTillHasLine();
+    forward();
+    delay(1500);
   } else if (wallLeft() && wallRight()) {
     // U-Svängen
     stay();
@@ -45,26 +49,26 @@ void checkWallSensorsLostLine() {
   }
 }
 
-void forwardTillHasLine() {
-  Serial.println("forwardTillHasLine");
-  while (!hasLine()) {
-    slowForward();
-    delay(50);
-  }
-}
+//void forwardTillHasLine() {
+//  Serial.println("forwardTillHasLine");
+//  while (!hasLine()) {
+//    slowForward();
+//    delay(50);
+//  }
+//}
 
 
-void findLine() {
-  Serial.println("findLine");
-  while (!hasLine()) {
-    Serial.println("in findLine loop");
-    backward();
-    delay(500);
-    stay();
-    delay(500);
-  }
-  Serial.println("left while findLine");
-}
+//void findLine() {
+//  Serial.println("findLine");
+//  while (!hasLine()) {
+//    Serial.println("in findLine loop");
+//    backward();
+//    delay(500);
+//    stay();
+//    delay(500);
+//  }
+//  Serial.println("left while findLine");
+//}
 
 
 
