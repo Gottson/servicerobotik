@@ -66,7 +66,7 @@ void loop()
 {
   
 hasLine();
-choiceHandler("r");
+choiceHandler();
 lineDriveCommander();
 //sensorCheck();
 
