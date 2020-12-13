@@ -17,7 +17,7 @@ boolean holding = false;
 boolean gripLifted = false;
   
 //Front sensor Initialization
-#define sensorBuff 3
+#define sensorBuff 7
 #define IRPin A1
 int avgDist[sensorBuff];
 uint8_t distance_limit = 88;//frontsensor
@@ -64,6 +64,9 @@ void setup()
 
 void loop()
 {
+  
+hasLine();
+choiceHandler();
 lineDriveCommander();
 //sensorCheck();
 

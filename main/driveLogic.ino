@@ -141,3 +141,35 @@ int choiceCount(){
   }
   return i;
 }
+
+
+//controls cases where more than one path is awaiable.
+void choiceHandler(String choice){
+    
+    posValue = qtr.readLineBlack(sensorValues);
+    if  (leftEndSensor()){
+      if (!wallInFront()){
+        //mazeHandler välj väg
+        Serial.println("Välja fram eller vänster");
+      }
+      
+    }
+        if  (rightEndSensor()){
+      if (!wallInFront()){
+        //mazeHandler välj
+        Serial.println("Välja fram eller höger");
+      }
+      
+    }
+    if(leftEndSensor() && rightEndSensor()){
+      if (wallInFront()){
+        //mazeHandler välj väg
+        Serial.println("T-section");
+      }
+      else if (!wallInFront()){
+        //mazeHandler välj väg
+        Serial.println("Cross-section");
+      }
+    }
+
+}

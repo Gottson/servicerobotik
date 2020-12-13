@@ -37,20 +37,6 @@ void sensorCheck(){
 
 //Get the linecommanders calculated position and sets direction + prints recommendation
 void lineDriveCommander() {
-  
-    posValue = qtr.readLineBlack(sensorValues);
-    if  (leftEndSensor()){
-      if (!wallInFront()){
-        Serial.println("Välja fram eller vänster");
-      }
-      
-    }
-        if  (rightEndSensor()){
-      if (!wallInFront()){
-        Serial.println("Välja fram eller höger");
-      }
-      
-    }
 
   
     if(posValue < 2 ){
@@ -93,9 +79,12 @@ void lineDriveCommander() {
     delay(50);
 }
 
-boolean hasLine(){
-  Serial.println(qtr.readLineBlack(sensorValues));
-  return (0>qtr.readLineBlack(sensorValues)<7000);
+void hasLine(){
+  posValue = qtr.readLineBlack(sensorValues);
+  //Serial.println(qtr.readLineBlack(sensorValues));
+  if (0==posValue || posValue == 7000){
+    noLineHandler();
+  }
 }
 
 boolean leftEndSensor(){
