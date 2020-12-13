@@ -89,7 +89,7 @@ int choiceCount(){
 
 
 //controls cases where more than one path is awaiable.
-void choiceHandler(String choice){
+void choiceHandler(){
     
     posValue = qtr.readLineBlack(sensorValues);
     if  (leftEndSensor()){
@@ -99,6 +99,7 @@ void choiceHandler(String choice){
         delay(2000);
         attachServ();
         Serial.println("Välja fram eller vänster");
+        currentMazeSide();
       }
       
     }
@@ -109,6 +110,7 @@ void choiceHandler(String choice){
         delay(2000);
         attachServ();
         Serial.println("Välja fram eller höger");
+        currentMazeSide();
       }
       
     }
@@ -119,10 +121,12 @@ void choiceHandler(String choice){
       if (wallInFront()){
         //mazeHandler välj väg
         Serial.println("T-section");
+        currentMazeSide();
       }
       else if (!wallInFront()){
         //mazeHandler välj väg
         Serial.println("Cross-section");
+        currentMazeSide();
       }
     }
 

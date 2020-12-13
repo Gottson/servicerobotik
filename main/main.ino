@@ -65,9 +65,10 @@ void setup()
 void loop()
 {
   
-//hasLine();
-//choiceHandler("r");
-//lineDriveCommander();
+hasLine();
+choiceHandler();
+lineDriveCommander();
+
 //sensorCheck();
 //Serial.println("We are in main");
 Serial.println(wallInFront());
