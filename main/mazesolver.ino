@@ -6,7 +6,7 @@ uint8_t leftway = 0;
 uint8_t leftWayHome = 0;
 uint8_t currentMazeId = 0;
 uint8_t rightWay = 0;
-uint16_t nudge = 500;
+uint16_t nudge = 1000;
 
 
 void currentMazeSide (){

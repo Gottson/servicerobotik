@@ -39,8 +39,8 @@ void strongRight(){
 }
 
 void rotateRight(){
- leftServo.write(85);
-  rightServo.write(85);
+ leftServo.write(75);
+  rightServo.write(75);
 
    delay(15);  
 }

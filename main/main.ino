@@ -20,7 +20,7 @@ boolean gripLifted = false;
 #define sensorBuff 7
 #define IRPin A1
 int avgDist[sensorBuff];
-uint8_t distance_limit = 88;//frontsensor
+uint8_t distance_limit = 70;//frontsensor
 uint8_t front_dist;
 //boolean wallInFront = false;
 
@@ -54,7 +54,7 @@ boolean turnIgnore = false;
 void setup()
 {
   sideSensorSetup();
- // lineSensorSetup();
+  lineSensorSetup();
   wheelServoSetup();
   gripServoSetup();
   frontSensorSetup();
@@ -69,11 +69,17 @@ hasLine();
 choiceHandler();
 lineDriveCommander();
 
-//sensorCheck();
-//Serial.println("We are in main");
+
+//testSensors();
+
+}
+
+void testSensors(){
+  Serial.print("Front: ");
 Serial.println(wallInFront());
-//Serial.println(analogRead(IRPin));
+Serial.print("Left end sensor: ");
+Serial.println(leftEndSensor());
+Serial.print("Right end sensor:");
+Serial.println(rightEndSensor());
 delay(500);
-
-
 }

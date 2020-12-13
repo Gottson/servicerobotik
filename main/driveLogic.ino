@@ -10,7 +10,7 @@ void checkFrontSensorsLostLine() {
   delay(1000);
   attachServ();
   while (!wallInFront()) {
-    Serial.println("Forward in wall left");
+    Serial.println("No line and no wall in front, slow forward");
     slowForward();
     delay(50);
   }
@@ -36,17 +36,27 @@ void checkWallSensorsLostLine() {
     forward();
     delay(1500);
   } else if (wallLeft() && wallRight()) {
+    Serial.println("U TURN");
     // U-Svängen
-    stay();
+    detachServ();
+    delay(1000);
     lift();
+    attachServ();
     rotateRight();
-    delay(3000);
-    while (wallInFront()) {
+    delay(100);
+    while(!getLine()){
       rotateRight();
-      delay(50);
     }
-    stay();
+    //while (wallInFront()) {
+     // rotateRight();
+     // delay(50);
+    //}
+    detachServ();
     unLift();
+    attachServ();
+    calibrateDrive();
+    stay();
+    //unLift();
   }
 }
 
@@ -93,6 +103,7 @@ void choiceHandler(){
     
     posValue = qtr.readLineBlack(sensorValues);
     if  (leftEndSensor()){
+      
       if (!wallInFront()){
         //mazeHandler välj väg
         detachServ();
@@ -100,6 +111,7 @@ void choiceHandler(){
         attachServ();
         Serial.println("Välja fram eller vänster");
         currentMazeSide();
+        calibrateDrive();
       }
       
     }
@@ -111,6 +123,7 @@ void choiceHandler(){
         attachServ();
         Serial.println("Välja fram eller höger");
         currentMazeSide();
+        calibrateDrive();
       }
       
     }
@@ -122,12 +135,15 @@ void choiceHandler(){
         //mazeHandler välj väg
         Serial.println("T-section");
         currentMazeSide();
+        calibrateDrive();
       }
       else if (!wallInFront()){
         //mazeHandler välj väg
         Serial.println("Cross-section");
         currentMazeSide();
+        calibrateDrive();
       }
     }
+
 
 }

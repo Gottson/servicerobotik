@@ -1,12 +1,12 @@
-float Kp = 0.013; //set up the constants value
+float Kp = 0.02; //set up the constants value
 float Ki = 0;
-float Kd = 0.013;
+float Kd = 0.0;
 int P;
 int I;
 int D;
 //Set basevalues for straightline (a = left, b = right);
-int basespeeda = 120;
-int basespeedb = 120;
+int basespeeda = 110;
+int basespeedb = 110;
 
 //Increasing the maxspeed can damage the motors - at a value of 255 the 6V motors will receive 7,4 V 
 const uint8_t maxspeeda = 180;
@@ -33,7 +33,7 @@ void lineSensorSetup(){
   }
   //digitalWrite(LED_BUILTIN, LOW); // turn off Arduino's LED to indicate we are through with calibration
 
-
+Serial.println("Line cal done");
 }
 
 
@@ -63,7 +63,7 @@ void lineDriveCommander() {
 }
 void PID_control() {
   uint16_t position = qtr.readLineBlack(sensorValues);
-  int error = 3000 - position;
+  int error = 3300 - position;
 
   P = error;
   I = I + error;
@@ -124,6 +124,14 @@ void hasLine(){
     noLineHandler();
   }
 }
+boolean getLine(){
+  posValue = qtr.readLineBlack(sensorValues);
+  if(0 == posValue || posValue == 7000){
+    return false;
+  }else{
+    return true;
+  }
+}
 
 boolean leftEndSensor(){
   qtr.readLineBlack(sensorValues);
@@ -144,4 +152,12 @@ boolean rightEndSensor(){
   else{
     return false;
   }
+}
+
+void calibrateDrive(){
+  Serial.println("Started calibrate drive");
+      for (int i = 0; i < 100; i++){
+      PID_control();
+    }
+  Serial.println("Ended calibrate drive");
 }
