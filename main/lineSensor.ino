@@ -1,3 +1,19 @@
+float Kp = 0; //set up the constants value
+float Ki = 0;
+float Kd = 0;
+int P;
+int I;
+int D;
+//Set basevalues for straightline (a = left, b = right);
+int basespeeda = 75;
+int basespeedb = 105;
+
+//Increasing the maxspeed can damage the motors - at a value of 255 the 6V motors will receive 7,4 V 
+const uint8_t maxspeeda = 170;
+const uint8_t maxspeedb = 10;
+
+int lastError = 0;
+boolean onoff = false;
 
 void lineSensorSetup(){
 
@@ -22,8 +38,8 @@ void lineSensorSetup(){
 
 
 void sensorCheck(){
-
-  posValue = qtr.readLineBlack(sensorValues);
+ 
+  
   
   for (uint8_t i = 0; i < SensorCount; i++)
   {
@@ -37,60 +53,59 @@ void sensorCheck(){
 
 //Get the linecommanders calculated position and sets direction + prints recommendation
 void lineDriveCommander() {
+  if(!onoff){
+    delay(1000);
+    onoff = !onoff;
+  }
+  if(onoff){
+    PID_control();
+  }
+}
+void PID_control() {
+  uint16_t position = qtr.readLineBlack(sensorValues);
+  int error = 3000 - position;
+
+  P = error;
+  I = I + error;
+  D = error - lastError;
+  lastError = error;
+  int motorspeed = P*Kp + I*Ki + D*Kd;
   
-    posValue = qtr.readLineBlack(sensorValues);
-    if  (leftEndSensor()){
-      if (!wallInFront()){
-        Serial.println("Välja fram eller vänster");
-      }
-      
-    }
-        if  (rightEndSensor()){
-      if (!wallInFront()){
-        Serial.println("Välja fram eller höger");
-      }
-      
-    }
-
+  int motorspeeda = basespeeda + motorspeed;
+  int motorspeedb = basespeedb - motorspeed;
   
-    if(posValue < 2 ){
-      
-      noLineHandler();
-      
-    }    
-     if(posValue < 1000 && posValue > 1 ){
-      rotateRight();
-    }
-     if(posValue < 2000 && posValue > 1000){
+  if (motorspeeda > maxspeeda) {
+    motorspeeda = maxspeeda;
+  }
+  if (motorspeedb < maxspeedb) {
+    motorspeedb = maxspeedb;
+  }
+  if (motorspeeda < 0) {
+    motorspeeda = 0;
+  }
+  if (motorspeedb < 0) {
+    motorspeedb = 0;
+  } 
+  motorspeedb = 180 - motorspeedb;
+  _updatePWM(motorspeeda, motorspeedb);
+  //Serial.print(motorspeeda);Serial.print(" ");Serial.println(motorspeedb);
+}
 
-      strongRight();
+void _updatePWM(int motorspeeda, int motorspeedb){
+    if(motorspeedb<0){
+      rightServo.write(0);
+    }else if(motorspeedb>180){
+      rightServo.write(180);
+    }else{
+      rightServo.write(motorspeedb);
     }
-     if(posValue > 2000 && posValue <3000){
-      slightRight();
-      //turnIgnore = false;
+    if(motorspeeda<0){
+      leftServo.write(0);
+    }else if(motorspeeda > 180){
+      leftServo.write(180);
+    }else{
+      leftServo.write(motorspeeda);
     }
-    if(posValue > 3000 && posValue <3400){
-      forward();
-      //turnIgnore = false;
-    }
-    if(posValue > 3400 && posValue <4500){
-
-      slightLeft();
-    }
-    if(posValue > 4500 && posValue <6000){
-
-      strongLeft();
-    }
-    if(posValue > 6000 && posValue < 7000){
-      rotateLeft();
-    }
-    if(posValue > 6999 ){
-      
-      noLineHandler();
-      
-    }
-    
-    delay(50);
 }
 
 boolean hasLine(){
