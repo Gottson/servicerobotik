@@ -1,5 +1,6 @@
 //Called when line is lost. Sets custom drive patterns for a certain time.
 void noLineHandler() {
+  detachServ();
   checkFrontSensorsLostLine();
 }
 
@@ -94,6 +95,9 @@ void choiceHandler(String choice){
     if  (leftEndSensor()){
       if (!wallInFront()){
         //mazeHandler välj väg
+        detachServ();
+        delay(2000);
+        attachServ();
         Serial.println("Välja fram eller vänster");
       }
       
@@ -101,11 +105,17 @@ void choiceHandler(String choice){
         if  (rightEndSensor()){
       if (!wallInFront()){
         //mazeHandler välj
+        detachServ();
+        delay(2000);
+        attachServ();
         Serial.println("Välja fram eller höger");
       }
       
     }
     if(leftEndSensor() && rightEndSensor()){
+      detachServ();
+      delay(2000);
+      attachServ();
       if (wallInFront()){
         //mazeHandler välj väg
         Serial.println("T-section");

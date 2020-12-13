@@ -16,11 +16,14 @@ void frontSensorSetup(){
 // 85 volt isch 14 cm
 // Sets wallInFront to false or true depending on measurements from front sensor
 boolean wallInFront(){
-
-  for(int i=0; i++; i<sensorBuff){
+  //Serial.println("We are in wallInFront");
+  for(int i=0; i<sensorBuff; i++){
     avgDist[i] = analogRead(IRPin);
+    //Serial.println(analogRead(IRPin));
   }
+  //Serial.println(avgDist);
   int avg = _avgDist(avgDist);
+  //Serial.println(avg);
   if(avg > distance_limit){
     return true;
   }else{

@@ -54,7 +54,7 @@ boolean turnIgnore = false;
 void setup()
 {
   sideSensorSetup();
-  lineSensorSetup();
+ // lineSensorSetup();
   wheelServoSetup();
   gripServoSetup();
   frontSensorSetup();
@@ -65,11 +65,14 @@ void setup()
 void loop()
 {
   
-hasLine();
-choiceHandler("r");
-lineDriveCommander();
+//hasLine();
+//choiceHandler("r");
+//lineDriveCommander();
 //sensorCheck();
-
+//Serial.println("We are in main");
+Serial.println(wallInFront());
+//Serial.println(analogRead(IRPin));
+delay(500);
 
 
 }
