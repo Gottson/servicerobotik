@@ -1,6 +1,6 @@
 float Kp = 0.02; //set up the constants value
 float Ki = 0;
-float Kd = 0.0;
+float Kd = 0.01;
 int P;
 int I;
 int D;

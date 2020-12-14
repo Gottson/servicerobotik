@@ -1,86 +1,17 @@
 //Called when line is lost. Sets custom drive patterns for a certain time.
 void noLineHandler() {
-  detachServ();
-  checkFrontSensorsLostLine();
-}
-
-void checkFrontSensorsLostLine() {
-  Serial.println("checkFrontSensorsLostLine");
-  detachServ();
-  delay(1000);
-  attachServ();
-  while (!wallInFront()) {
-    Serial.println("No line and no wall in front, slow forward");
-    slowForward();
-    delay(50);
-  }
-  checkWallSensorsLostLine();
-}
-
-
-void checkWallSensorsLostLine() {
-  Serial.println("checkWallSensorsLostLine");
-  detachServ();
-  delay(1000);
-  attachServ();
-  if (wallLeft() && !wallRight()) {
-    strongRight();
-    delay(1500);
-    forward();
-    delay(1500);
-    //forwardTillHasLine();
-  } else if (!wallLeft() && wallRight()) {
-    strongLeft();
-    delay(1500);
-    //forwardTillHasLine();
-    forward();
-    delay(1500);
-  } else if (wallLeft() && wallRight()) {
-    Serial.println("U TURN");
-    // U-Svängen
+  //detachServ();
+  //checkFrontSensorsLostLine();
+  if(getRightCount() == 8){
     detachServ();
     delay(1000);
-    lift();
     attachServ();
-    rotateRight();
-    delay(100);
-    while(!getLine()){
-      rotateRight();
-    }
-    //while (wallInFront()) {
-     // rotateRight();
-     // delay(50);
-    //}
-    detachServ();
-    unLift();
-    attachServ();
-    calibrateDrive();
-    stay();
-    //unLift();
+    uTurnHandler();
+    incrementRight();
   }
+  noLine();
+  //Serial.println("NO LINE");
 }
-
-//void forwardTillHasLine() {
-//  Serial.println("forwardTillHasLine");
-//  while (!hasLine()) {
-//    slowForward();
-//    delay(50);
-//  }
-//}
-
-
-//void findLine() {
-//  Serial.println("findLine");
-//  while (!hasLine()) {
-//    Serial.println("in findLine loop");
-//    backward();
-//    delay(500);
-//    stay();
-//    delay(500);
-//  }
-//  Serial.println("left while findLine");
-//}
-
 
 
 int choiceCount(){
@@ -106,9 +37,9 @@ void choiceHandler(){
       
       if (!wallInFront()){
         //mazeHandler välj väg
-        detachServ();
-        delay(2000);
-        attachServ();
+       // detachServ();
+        //delay(250);
+        //attachServ();
         Serial.println("Välja fram eller vänster");
         currentMazeSide();
         calibrateDrive();
@@ -118,9 +49,9 @@ void choiceHandler(){
         if  (rightEndSensor()){
       if (!wallInFront()){
         //mazeHandler välj
-        detachServ();
-        delay(2000);
-        attachServ();
+       // detachServ();
+       // delay(250);
+       // attachServ();
         Serial.println("Välja fram eller höger");
         currentMazeSide();
         calibrateDrive();
@@ -128,9 +59,9 @@ void choiceHandler(){
       
     }
     if(leftEndSensor() && rightEndSensor()){
-      detachServ();
-      delay(2000);
-      attachServ();
+     // detachServ();
+     // delay(250);
+     // attachServ();
       if (wallInFront()){
         //mazeHandler välj väg
         Serial.println("T-section");
@@ -144,6 +75,58 @@ void choiceHandler(){
         calibrateDrive();
       }
     }
+}
 
+void noLine(){
+  //if(getRightCount() != 5 || getLeftCount() != 1){
+  if(wallRight()&&wallLeft()&&wallInFront()){
+    Serial.println("Uturn handler");
+    uTurnHandler();
+  }
+//  }
+  
+else if((!wallNear() && wallLeft())){
+  while((!wallNear() && wallLeft())){
+    Wall_p_cont();
+    //Serial.println(hc.dist(
+    Serial.println("No line turn right");
+  }
+  rotateRight();
+  delay(800);
+  forward();
+  delay(600);
+  while(!getLine()){
+    //forward();
+    Wall_p_cont();
+  }
+  //forward();
+  //delay(500);
+  calibrateDrive();
+}
 
+  
+}
+
+void uTurnHandler(){
+      Serial.println("U TURN");
+    // U-Svängen
+    detachServ();
+    delay(250);
+    lift();
+    attachServ();
+    rotateRight();
+    delay(100);
+    while(!getLine()){
+      rotateRight();
+    }
+    //while (wallInFront()) {
+     // rotateRight();
+     // delay(50);
+    //}
+    detachServ();
+    unLift();
+    attachServ();
+    calibrateDrive();
+    stay();
+    //unLift();
 }

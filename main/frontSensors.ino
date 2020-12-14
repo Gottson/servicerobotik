@@ -31,6 +31,22 @@ boolean wallInFront(){
   }
 }
 
+boolean wallNear(){
+  //Serial.println("We are in wallInFront");
+  for(int i=0; i<sensorBuff; i++){
+    avgDist[i] = analogRead(IRPin);
+    //Serial.println(analogRead(IRPin));
+  }
+  //Serial.println(avgDist);
+  int avg = _avgDist(avgDist);
+  //Serial.println(avg);
+  if(avg > 95){
+    return true;
+  }else{
+    return false;
+  }
+}
+
 int _avgDist(int dist[]){
   int avg = 0;
   for(int i = 0; i<sensorBuff;i++){

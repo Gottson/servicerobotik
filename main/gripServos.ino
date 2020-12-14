@@ -14,15 +14,26 @@ void gripServoSetup() {
 void collectCylinder() {
 
     //stay();
-    delay(500);
+    detachServ();
+    delay(250);
     grip();
-    delay(500);
+    delay(250);
     lift();
-    delay(500);
+    delay(250);
     unGrip();
-    delay(500); 
+    delay(250); 
     unLift();
-    delay(500); 
+    delay(250);
+    
+    grip();
+    delay(50);
+    lift();
+    delay(50);
+    unGrip();
+    delay(50); 
+    unLift();
+    delay(50); 
+    attachServ();
  
 }
 

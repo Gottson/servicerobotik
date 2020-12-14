@@ -64,14 +64,13 @@ void setup()
 
 void loop()
 {
-  
+if(frontSwitch()){
+  collectCylinder();
+}
 hasLine();
 choiceHandler();
 lineDriveCommander();
-
-
 //testSensors();
-
 }
 
 void testSensors(){

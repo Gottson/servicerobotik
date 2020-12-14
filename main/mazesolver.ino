@@ -20,15 +20,20 @@ void currentMazeSide (){
 uint8_t getRightCount(){
   return rightWay;
 }
+uint8_t getLeftCount(){
+  return leftway;
+}
+
 void incrementRight(){
   rightWay++;
 }
 
 void mazeLeftSide(int choices){
+  Serial.println("mazeLeft");
+  Serial.println(leftway);
     switch (leftway) {
         case 0:
-            strongLeft();
-            delay(nudge);
+            _left();
             leftway ++;
             break;
         case 1:
@@ -37,18 +42,15 @@ void mazeLeftSide(int choices){
             leftway ++;
             break;
         case 2:
-            strongLeft();
-            delay(nudge);
+            _left();
             leftway ++;
             break;
         case 3:
-            strongLeft();
-            delay(nudge);
+            _left();
             leftway ++;
             break;
         case 4:
-            strongLeft();
-            delay(nudge);
+            _left();
             leftway ++;
             break;
         case 5:
@@ -57,28 +59,30 @@ void mazeLeftSide(int choices){
             leftway ++;
             break;
         case 6:
-            strongLeft();
-            delay(nudge);
+            _left();
             leftway ++;
             break;
+            //CASE SEX ÄR VÄSTERSVÄNGEN SOM INTE ÄR ETT VAL
         case 7:
+            _left();
+            leftway ++;
+            break;
+        
+        case 8:
             forward();
             delay(100);
             leftway ++;
             break;
-        case 8:
-            strongRight();
-            delay(nudge);
-            leftway ++;
-            break;
         case 9:
-            strongLeft();
-            delay(nudge);
+            _right();
             leftway ++;
             break;
         case 10:
-            strongRight();
-            delay(nudge);
+            _left();
+            leftway ++;
+            break;
+        case 11:
+            _right();
             leftway ++;
             break;
     }
@@ -88,13 +92,11 @@ Serial.println("mazeRight");
 Serial.println(rightWay);
 switch (rightWay) {
   case 0:
-    strongLeft();
-    delay(nudge);
+    _left();
     rightWay ++;
     break;
   case 1:
-    strongLeft();
-    delay(nudge);
+    _left();
     rightWay ++;
     break;
   case 2:
@@ -108,13 +110,11 @@ switch (rightWay) {
     rightWay ++;
     break;
   case 4:
-    strongLeft();
-    delay(nudge);
+    _left();
     rightWay ++;
     break;
   case 5:
-    strongLeft();
-    delay(nudge);
+    _left();
     rightWay ++;
     break;
   case 6:
@@ -123,14 +123,29 @@ switch (rightWay) {
     rightWay ++;
     break;
   case 7:
-    strongRight();
-    delay(nudge);
+    _right();
     rightWay ++;
     break;
   case 8:
-    strongLeft();
-    delay(nudge);
-    rightWay ++;
+    _left();
+    currentMazeId++;
     break;
+ 
 }
+}
+void _left(){
+  strongLeft();
+  delay(nudge);
+  while(!getLine()){
+    strongLeft();
+  }
+  //calibrateDrive();
+}
+void _right(){
+  strongRight();
+  delay(nudge);
+  while(!getLine()){
+    strongRight();
+  }
+  //calibrateDrive();
 }
