@@ -80,8 +80,12 @@ void choiceHandler(){
 void noLine(){
   //if(getRightCount() != 5 || getLeftCount() != 1){
   if(wallRight()&&wallLeft()&&wallInFront()){
+    rotateRight();
+    delay(120);
+    if(wallRight() && wallLeft() && wallInFront()){
     Serial.println("Uturn handler");
     uTurnHandler();
+    }
   }
 //  }
   

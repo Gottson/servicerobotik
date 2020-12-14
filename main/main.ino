@@ -20,7 +20,7 @@ boolean gripLifted = false;
 #define sensorBuff 7
 #define IRPin A1
 int avgDist[sensorBuff];
-uint8_t distance_limit = 75;//frontsensor
+uint8_t distance_limit = 78;//frontsensor
 uint8_t front_dist;
 //boolean wallInFront = false;
 
