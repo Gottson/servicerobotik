@@ -3,7 +3,7 @@
 #include <HCSR04.h>
 
 
-// Gripper Initialization
+// Gripper initialization
 
 Servo grip_servo;
 Servo lift_servo;
@@ -15,16 +15,16 @@ Servo lift_servo;
 #define gripRestAngle 85
 boolean holding = false;
 boolean gripLifted = false;
-  
-//Front sensor Initialization
+
+//Front sensor initialization
 #define sensorBuff 7
 #define IRPin A1
 int avgDist[sensorBuff];
-uint8_t distance_limit = 78;//frontsensor
-uint8_t front_dist;
-//boolean wallInFront = false;
+uint8_t wallInFrontLimit = 75;
+uint8_t wallNearLimit = 105;
 
-//Brytare
+
+//Front switch initialization
 #define breakSwitch A0
 
 // Wheel drive initialization
@@ -36,49 +36,58 @@ QTRSensors qtr;
 const uint8_t SensorCount = 8;
 uint16_t sensorValues[SensorCount];
 uint16_t posValue;
-//boolean hasLine = true;
 
-//Side sensors init
-HCSR04 hc(16,new int[2]{17,18},2);
+
+//Side sensors initialization
+HCSR04 hc(16, new int[2] {17, 18}, 2);
 //initialisation of class HCSR04 (trig pin , echo pin, number of sensor)
 uint8_t side_distance_limit = 14;
-//boolean wallLeft = false;
-//boolean wallRight = false;
 
-//Maze logic
-int cylinderCount = 0;
 
-//
-boolean turnIgnore = false;
-
+//Open serial port and run setup code for different sensors and servos
 void setup()
 {
-  sideSensorSetup();
+  Serial.begin(9600);
   lineSensorSetup();
   wheelServoSetup();
   gripServoSetup();
   frontSensorSetup();
-  
-  ///gripperUp();
+
 }
 
+//Loops the main program. Checks for cylinder, lost line or if robot has a choice to make.
+//If non of those cases are active it will follow line.
 void loop()
 {
-if(frontSwitch()){
-  collectCylinder();
-}
-hasLine();
-choiceHandler();
-lineDriveCommander();
-//testSensors();
+  if (frontSwitch()) {
+    collectCylinder();
+  }
+  hasLine();
+  choiceHandler();
+  lineDriveCommander();
+  //testSensors();
 }
 
-void testSensors(){
-  Serial.print("Front: ");
-Serial.println(wallInFront());
-Serial.print("Left end sensor: ");
-Serial.println(leftEndSensor());
-Serial.print("Right end sensor:");
-Serial.println(rightEndSensor());
-delay(500);
+//Print what each sensor detects.
+void testSensors() {
+  Serial.println("------------------");
+  Serial.println("Value: ");
+  Serial.println(analogRead(IRPin));
+  Serial.print("Wall in front: ");
+  Serial.println(wallInFront());
+  Serial.println("****");
+  Serial.print("Wall near: ");
+  Serial.println(wallNear());
+//  Serial.print("Left end linesensor: ");
+//  Serial.println(leftEndSensor());
+//  Serial.print("Right end linesensor: ");
+//  Serial.println(rightEndSensor());
+//  Serial.print("Left sound sensor: ");
+//  Serial.println(wallLeft());
+//  Serial.print("Right sound sensor: ");
+//  Serial.println(wallRight());
+//  Serial.print("Front break switch: ");
+//  Serial.println(frontSwitch());
+  Serial.println("------------------");
+  delay(2000);
 }

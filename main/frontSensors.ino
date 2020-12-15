@@ -1,62 +1,49 @@
 int last;
-
-void frontSensorSetup(){
+//Setup breakSwitch
+void frontSensorSetup() {
 
   //Front Switch
   pinMode(INPUT, breakSwitch);
 
-  //Distance sensor
-//  int val = analogRead(IRPin);
-//  for(int i = 0; i<sensorBuff; i++){
-//    avgDist[i] = val;
-//  }
-//  last = 0;
 }
 
 // 85 volt isch 14 cm
-// Sets wallInFront to false or true depending on measurements from front sensor
-boolean wallInFront(){
-  //Serial.println("We are in wallInFront");
-  for(int i=0; i<sensorBuff; i++){
+// returns true if front sensor is closer to wall than wallInFrontLimit
+boolean wallInFront() {
+  for (int i = 0; i < sensorBuff; i++) {
     avgDist[i] = analogRead(IRPin);
-    //Serial.println(analogRead(IRPin));
   }
-  //Serial.println(avgDist);
   int avg = _avgDist(avgDist);
-  //Serial.println(avg);
-  if(avg > distance_limit){
+  if (avg > wallInFrontLimit) {
     return true;
-  }else{
+  } else {
     return false;
   }
 }
 
-boolean wallNear(){
-  //Serial.println("We are in wallInFront");
-  for(int i=0; i<sensorBuff; i++){
+// returns true if front sensor is closer to something than wallNearLimit
+boolean wallNear() {
+  for (int i = 0; i < sensorBuff; i++) {
     avgDist[i] = analogRead(IRPin);
-    //Serial.println(analogRead(IRPin));
   }
-  //Serial.println(avgDist);
   int avg = _avgDist(avgDist);
-  //Serial.println(avg);
-  if(avg > 95){
+  if (avg > wallNearLimit) {
     return true;
-  }else{
+  } else {
     return false;
   }
 }
-
-int _avgDist(int dist[]){
+//Private average function
+int _avgDist(int dist[]) {
   int avg = 0;
-  for(int i = 0; i<sensorBuff;i++){
+  for (int i = 0; i < sensorBuff; i++) {
     avg += avgDist[i];
   }
-  return avg/sensorBuff; 
+  return avg / sensorBuff;
 }
 
 
-//Returns value of front switch
-boolean frontSwitch(){
+//Returns true of front switch is pressed
+boolean frontSwitch() {
   return !digitalRead(breakSwitch);
- }
+}

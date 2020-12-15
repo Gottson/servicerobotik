@@ -1,83 +1,87 @@
-void wheelServoSetup(){
-  leftServo.attach(10);  // attaches the servos on pins
+// Attaches the wheel servos to their pins
+void wheelServoSetup() {
+  leftServo.attach(10);  
   rightServo.attach(11);
 }
 
-void forward(){
+//All functions below writes custom servo values to servos based on what function is named.
+
+void forward() {
   leftServo.write(75);
   rightServo.write(105);
-  delay(15);  
+  delay(15);
 }
-void backward(){
-    leftServo.write(100);
-    rightServo.write(80);
-    delay(15);
+void backward() {
+  leftServo.write(100);
+  rightServo.write(80);
+  delay(15);
 }
 
-void slowForward(){
+void slowForward() {
   leftServo.write(83);
   rightServo.write(95);
   delay(15);
 }
 
-void stay(){
+void stay() {
   leftServo.write(90);
   rightServo.write(90);
 }
 
-void slightRight(){
+void slightRight() {
   leftServo.write(80);
   rightServo.write(97);
-   delay(15);  
+  delay(15);
 }
 
-void strongRight(){
- leftServo.write(80);
+void strongRight() {
+  leftServo.write(80);
   rightServo.write(90);
 
-   delay(15);  
+  delay(15);
 }
 
-void rotateRight(){
- leftServo.write(75);
+void rotateRight() {
+  leftServo.write(75);
   rightServo.write(75);
 
-   delay(15);  
+  delay(15);
 }
 
-void slightLeft(){
- leftServo.write(83);
+void slightLeft() {
+  leftServo.write(83);
   rightServo.write(100);
 
-   delay(15);  
+  delay(15);
 }
 
-void strongLeft(){
- leftServo.write(90);
+void strongLeft() {
+  leftServo.write(90);
   rightServo.write(100);
 
-   delay(15);  
+  delay(15);
 }
 
-void rotateLeft(){
- leftServo.write(95);
+void rotateLeft() {
+  leftServo.write(95);
   rightServo.write(95);
 
-   delay(15);  
+  delay(15);
 }
 
-void uTurn(){
- leftServo.write(95);
+void uTurn() {
+  leftServo.write(95);
   rightServo.write(95);
-  }
+  delay(15);
+}
 
-
-void detachServ(){
-  leftServo.detach(); // attaches the servos on pins
+// Detaches servos to make sure wheels are still
+void detachServ() {
+  leftServo.detach(); 
   rightServo.detach();
-  }
-
-void attachServ(){
-  leftServo.attach(10); // attaches the servos on pins
+}
+//Attaches wheel servos to pins
+void attachServ() {
+  leftServo.attach(10); 
   rightServo.attach(11);
-  }
+}
